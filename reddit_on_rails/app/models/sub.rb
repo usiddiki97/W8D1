@@ -4,7 +4,7 @@
 #
 #  id           :bigint           not null, primary key
 #  title        :string           not null
-#  description  :text             not null
+#  description  :string           not null
 #  moderator_id :integer          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -13,11 +13,14 @@ class Sub < ApplicationRecord
     validates :title, :description, presence: true
 
     belongs_to :moderator,
-    class_name: :User,
-    foreign_key: :moderator_id
+        foreign_key: :moderator_id,
+        class_name: 'User',
+        inverse_of: :moderated_subs
+
 
     has_many :posts,
-    class_name: :Post,
-    foreign_key: :sub_id
+        foreign_key: :sub_id,
+        class_name: 'Post',
+        inverse_of: "sub"
 
 end
