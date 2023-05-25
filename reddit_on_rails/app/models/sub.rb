@@ -16,6 +16,7 @@ class Sub < ApplicationRecord
         foreign_key: :moderator_id,
         class_name: 'User',
         inverse_of: :moderated_subs
+        # super important
 
 
     has_many :posts,
